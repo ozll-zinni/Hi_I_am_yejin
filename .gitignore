@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code skills (session tooling, not part of the app)
+.claude/skills/
+
+# markdown docs
+*.md
