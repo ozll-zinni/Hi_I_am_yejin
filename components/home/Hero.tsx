@@ -1,39 +1,32 @@
-import Link from "next/link";
 import { site } from "@/content/site";
+import { feroniapi, serif } from "@/lib/fonts";
+import { IdCard } from "./IdCard";
 
 export function Hero() {
   return (
-    <section className="flex min-h-[calc(100vh-4rem)] flex-col justify-center py-20">
-      <p className="font-mono text-sm tracking-wider text-accent">{site.role}</p>
-      <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
-        {site.name}
-      </h1>
-      <p className="mt-6 max-w-xl whitespace-pre-line text-lg text-muted sm:text-xl">
-        {site.tagline}
+    <section className={`${serif.className} relative h-[calc(100svh-4rem)] min-h-[560px]`}>
+      <p className="absolute left-0 top-8 z-20 whitespace-pre-line text-xs leading-snug sm:top-12 sm:text-[15px]">
+        {site.tagline}{" "}
+        <a href="#about" className="text-muted underline underline-offset-2 hover:text-foreground">
+          [more]
+        </a>
       </p>
-      <p className="mt-4 font-mono text-sm text-muted">
+      <p className="absolute right-0 top-8 z-20 text-right text-xs leading-snug sm:top-12 sm:text-[15px]">
+        {site.role}
+        <br />
         {site.heroStack.join(" · ")}
       </p>
 
-      <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <Link
-          href="/projects"
-          className="rounded-[--radius-base] bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-        >
-          View Projects
-        </Link>
-        <a
-          href={site.links.resume}
-          className="rounded-[--radius-base] border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-foreground/40"
-        >
-          View Resume
-        </a>
-        <a href={site.links.github} target="_blank" rel="noreferrer" className="text-sm text-muted hover:text-foreground">
-          GitHub
-        </a>
-        <a href={site.links.email} className="text-sm text-muted hover:text-foreground">
-          Email
-        </a>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0">
+        <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-x-clip">
+          <h1 className={`${feroniapi.className} select-none whitespace-nowrap text-center text-[20vw] leading-[1.15] pb-[0.06em]`}>
+            {site.fullNameEn}
+          </h1>
+        </div>
+      </div>
+
+      <div className="absolute inset-y-0 left-1/2 z-10 w-screen -translate-x-1/2">
+        <IdCard />
       </div>
     </section>
   );

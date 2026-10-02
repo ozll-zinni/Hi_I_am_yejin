@@ -1,7 +1,8 @@
-// Placeholder identity data — swap freely without touching any UI component.
 export const site = {
   name: "예진",
   nameEn: "Yejin",
+  fullName: "김예진",
+  fullNameEn: "Yejin Kim",
   role: "Frontend Developer",
   tagline: "사용자의 문제를 이해하고\n서비스로 해결하는 프론트엔드 개발자",
   heroStack: ["React", "JavaScript", "Next.js"],
