@@ -29,17 +29,7 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "WORK", href: "/projects" },
+  { label: "WORK", href: "/work" },
   { label: "BLOG", href: "/blog" },
   { label: "PLAYGROUND", href: "/playground" },
-] as const;
-
-// Anchor ids for the one-page home scroll-spy nav.
-export const homeSections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "blog", label: "Blog" },
-  { id: "other-experiences", label: "Other Experiences" },
 ] as const;

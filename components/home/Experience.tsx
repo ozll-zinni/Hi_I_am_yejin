@@ -2,7 +2,7 @@ import { experience, otherExperiences, type Experience as Item } from "@/content
 import { Section } from "./Section";
 
 export function Experience({ index }: { index: number }) {
-  return <ExperienceSection id="experience" title="Experience" items={experience} index={index} />;
+  return <ExperienceSection id="experience" title="Work" items={experience} index={index} />;
 }
 
 export function OtherExperiences({ index }: { index: number }) {
