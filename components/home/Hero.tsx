@@ -5,17 +5,19 @@ import { IdCard } from "./IdCard";
 export function Hero() {
   return (
     <section className={`${serif.className} relative h-[calc(100svh-4rem)] min-h-[560px]`}>
-      <p className="absolute left-0 top-8 z-20 whitespace-pre-line text-xs leading-snug sm:top-12 sm:text-[15px]">
-        {site.tagline}{" "}
-        <a href="#about" className="text-muted underline underline-offset-2 hover:text-foreground">
-          [more]
-        </a>
-      </p>
-      <p className="absolute right-0 top-8 z-20 text-right text-xs leading-snug sm:top-12 sm:text-[15px]">
-        {site.role}
-        <br />
-        {site.heroStack.join(" · ")}
-      </p>
+      <div className="absolute inset-x-0 top-8 z-20 flex flex-col gap-3 text-sm leading-snug sm:top-12 sm:flex-row sm:justify-between sm:text-[15px]">
+        <p className="whitespace-pre-line">
+          {site.tagline}{" "}
+          <a href="#about" className="text-muted underline underline-offset-2 hover:text-foreground">
+            [more]
+          </a>
+        </p>
+        <p className="sm:text-right">
+          {site.role}
+          <br />
+          {site.heroStack.join(" · ")}
+        </p>
+      </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0">
         <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-x-clip">
