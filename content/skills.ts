@@ -1,7 +1,7 @@
 export const skillGroups = [
   {
     title: "Core",
-    items: ["React", "JavaScript", "TypeScript", "Next.js"],
+    items: ["React", "JavaScript", "TypeScript", "Jotai"],
   },
   {
     title: "Development",
@@ -9,6 +9,6 @@ export const skillGroups = [
   },
   {
     title: "Interest",
-    items: ["Fintech", "UX", "Web Performance"],
+    items: ["Design System", "UX", "Web Performance"],
   },
 ] as const;
