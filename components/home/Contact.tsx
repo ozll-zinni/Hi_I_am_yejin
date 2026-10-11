@@ -1,25 +1,32 @@
 import { site } from "@/content/site";
+import { Section } from "./Section";
 
-export function Contact() {
+const links = [
+  { label: "GitHub", href: site.links.github },
+  { label: "LinkedIn", href: site.links.linkedin },
+  { label: "Email", href: site.links.email },
+];
+
+export function Contact({ index }: { index: number }) {
   return (
-    <section id="contact" className="scroll-mt-16 py-24">
-      <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
-        Let&apos;s build something.
-      </h2>
-      <p className="mt-4 max-w-lg text-lg text-muted">
-        Frontend development, interesting ideas, or collaboration.
+    <Section id="contact" index={index} title="Contact">
+      {/* TODO(copy): 실제 문구로 교체 */}
+      <p className="whitespace-pre-line text-4xl leading-tight tracking-tight sm:text-6xl">
+        {"같이 이야기하고 싶은 게 있다면\n편하게 연락 주세요."}
       </p>
-      <div className="mt-8 flex flex-wrap gap-6">
-        <a href={site.links.github} target="_blank" rel="noreferrer" className="text-sm font-medium text-accent">
-          GitHub
-        </a>
-        <a href={site.links.email} className="text-sm font-medium text-accent">
-          Email
-        </a>
-        <a href={site.links.linkedin} target="_blank" rel="noreferrer" className="text-sm font-medium text-accent">
-          LinkedIn
-        </a>
-      </div>
-    </section>
+      <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
+        {links.map((link) => (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              {...(link.href.startsWith("http") && { target: "_blank", rel: "noreferrer" })}
+              className="underline underline-offset-4 hover:text-muted"
+            >
+              {link.label} ↗
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 }

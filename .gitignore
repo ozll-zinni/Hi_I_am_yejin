@@ -42,6 +42,8 @@ next-env.d.ts
 
 # claude code skills (session tooling, not part of the app)
 .claude/skills/
+.agents/
+skills-lock.json
 
 # markdown docs
 *.md

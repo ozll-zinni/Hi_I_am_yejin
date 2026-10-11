@@ -1,6 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import Lanyard from "@/components/Lanyard/Lanyard";
 
-// three.js / rapier need the browser (WebGL + WASM), so skip prerendering.
-export const IdCard = dynamic(() => import("./Lanyard"), { ssr: false });
+export function IdCard() {
+  return <Lanyard frontImage="/card-front.jpg" backImage="/card-back.svg" strapImage="/band.png" />;
+}

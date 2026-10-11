@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900">
+  <rect width="640" height="900" fill="#ffffff"/>
+  <g font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif" fill="#111111">
+    <text x="64" y="560" font-size="22" letter-spacing="4" fill="#888888">NAME</text>
+    <text x="64" y="610" font-size="44" font-weight="700">김예진</text>
+    <text x="64" y="690" font-size="22" letter-spacing="4" fill="#888888">BIRTH</text>
+    <text x="64" y="732" font-size="32">2000.04.28</text>
+    <line x1="64" y1="790" x2="576" y2="790" stroke="#111111" stroke-width="2"/>
+    <text x="64" y="840" font-size="30" font-weight="700" letter-spacing="2">FE DEVELOPER</text>
+  </g>
+</svg>
