@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { getAllPlaygroundItems } from "@/content/playground";
-import { Container } from "@/components/shared/Container";
-import { SectionHeading } from "@/components/shared/SectionHeading";
-import { PlaygroundCard } from "@/components/shared/PlaygroundCard";
-import { ComingSoon } from "@/components/shared/ComingSoon";
+import { ListPage } from "@/components/shared/ListPage";
+import { RowList } from "@/components/shared/RowList";
 
 export const metadata: Metadata = {
   title: "Playground",
@@ -11,24 +9,19 @@ export const metadata: Metadata = {
 };
 
 export default function PlaygroundPage() {
-  const items = getAllPlaygroundItems();
-
   return (
-    <Container className="py-20">
-      <SectionHeading
-        eyebrow="PLAYGROUND"
-        title="무엇을 실험하고 있는가"
-        description="완성되지 않아도 괜찮은, 자유로운 실험 공간입니다."
+    <ListPage title="Playground" lead="완성되지 않아도 괜찮은, 자유로운 실험 공간입니다.">
+      <RowList
+        empty="곧 실험한 작업들을 올릴 예정입니다."
+        rows={getAllPlaygroundItems().map((item) => ({
+          href: `/playground/${item.slug}`,
+          meta: item.date,
+          title: item.title,
+          label: item.category,
+          body: item.description,
+          aside: item.stack.join(" · "),
+        }))}
       />
-      {items.length === 0 ? (
-        <ComingSoon message="곧 실험한 작업들을 올릴 예정입니다." />
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <PlaygroundCard key={item.slug} item={item} />
-          ))}
-        </div>
-      )}
-    </Container>
+    </ListPage>
   );
 }

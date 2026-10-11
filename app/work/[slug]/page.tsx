@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProjects, getProjectBySlug } from "@/content/projects";
 import { Container } from "@/components/shared/Container";
+import { DetailHeader, ExternalLinks, MetaGrid, repoLinks } from "@/components/shared/Detail";
 import { serif } from "@/lib/fonts";
 
 export function generateStaticParams() {
@@ -29,48 +29,20 @@ export default async function ProjectDetailPage({
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  const links = [
-    project.github && { label: "GitHub", href: project.github },
-    project.demo && { label: "Live Demo", href: project.demo },
-  ].filter((link): link is { label: string; href: string } => Boolean(link));
+  const links = repoLinks(project);
   const sitesByTheme = Object.entries(Object.groupBy(project.sites ?? [], (site) => site.theme));
 
   return (
     <Container className="pb-20 sm:pb-28">
       <article className={`${serif.className} break-keep pt-20 sm:pt-28`}>
-        {/* Mirrors the home Section header rule. */}
-        <div className="mb-12 flex items-baseline justify-between border-t border-foreground pt-3 text-xs sm:mb-16 sm:text-[15px]">
-          <Link href="/work" className="hover:text-muted">
-            ← Work
-          </Link>
-          <span className="tabular-nums">{project.period}</span>
-        </div>
-
-        <h1 className="text-4xl leading-tight tracking-tight sm:text-6xl">{project.name}</h1>
-        <p className="mt-6 max-w-3xl text-xl leading-relaxed tracking-tight sm:text-[26px]">{project.summary}</p>
-
-        <dl className="mt-16 grid gap-8 text-[15px] sm:mt-20 sm:grid-cols-3">
-          <div className="border-t border-border pt-3">
-            <dt className="text-muted">Category</dt>
-            <dd className="mt-2 leading-relaxed">{project.category.join(", ")}</dd>
-          </div>
-          <div className="border-t border-border pt-3">
-            <dt className="text-muted">Tech Stack</dt>
-            <dd className="mt-2 leading-relaxed">{project.stack.join(", ")}</dd>
-          </div>
-          {links.length > 0 && (
-            <div className="border-t border-border pt-3">
-              <dt className="text-muted">Links</dt>
-              <dd className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
-                {links.map((link) => (
-                  <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-muted">
-                    {link.label} ↗
-                  </a>
-                ))}
-              </dd>
-            </div>
-          )}
-        </dl>
+        <DetailHeader back={{ href: "/work", label: "Work" }} meta={project.period} title={project.name} lead={project.summary} />
+        <MetaGrid
+          items={[
+            { label: "Category", content: project.category.join(", ") },
+            { label: "Tech Stack", content: project.stack.join(", ") },
+            ...(links.length > 0 ? [{ label: "Links", content: <ExternalLinks links={links} /> }] : []),
+          ]}
+        />
 
         <div className="mt-20 sm:mt-28">
           {sitesByTheme.length > 0 && (
@@ -80,12 +52,8 @@ export default async function ProjectDetailPage({
                 {sitesByTheme.map(([theme, sites]) => (
                   <div key={theme}>
                     <dt className="text-[15px] text-muted">{theme}</dt>
-                    <dd className="mt-1 flex flex-wrap gap-x-6 gap-y-1">
-                      {sites?.map((site) => (
-                        <a key={site.url} href={site.url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-muted">
-                          {site.name} ↗
-                        </a>
-                      ))}
+                    <dd className="mt-1">
+                      <ExternalLinks links={(sites ?? []).map((site) => ({ label: site.name, href: site.url }))} />
                     </dd>
                   </div>
                 ))}

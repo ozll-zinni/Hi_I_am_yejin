@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { Container } from "@/components/shared/Container";
+import { DetailHeader } from "@/components/shared/Detail";
+import { serif } from "@/lib/fonts";
 
 export function generateStaticParams() {
   return getAllBlogPosts().map((p) => ({ slug: p.slug }));
@@ -29,16 +31,18 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <Container className="max-w-3xl py-20">
-      <p className="font-mono text-sm tracking-wider text-accent">
-        {post.frontmatter.date} · {post.frontmatter.category}
-      </p>
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">
-        {post.frontmatter.title}
-      </h1>
-      <div className="prose-blog mt-10">
-        <MDXRemote source={post.content} />
-      </div>
+    <Container className="pb-20 sm:pb-28">
+      <article className={`${serif.className} break-keep pt-20 sm:pt-28`}>
+        <DetailHeader
+          back={{ href: "/blog", label: "Blog" }}
+          meta={`${post.frontmatter.date} · ${post.frontmatter.category}`}
+          title={post.frontmatter.title}
+          lead={post.frontmatter.excerpt}
+        />
+        <div className="prose-blog mt-16 max-w-3xl sm:mt-20">
+          <MDXRemote source={post.content} />
+        </div>
+      </article>
     </Container>
   );
 }
