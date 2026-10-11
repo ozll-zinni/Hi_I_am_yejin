@@ -7,7 +7,6 @@ import { nav, site } from "@/content/site";
 
 // Home is a one-page scroll; these ids map a visible section back to a nav label.
 const SECTION_TO_NAV_LABEL: Record<string, string> = {
-  projects: "WORK",
   blog: "BLOG",
 };
 

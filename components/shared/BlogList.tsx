@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { BlogPostMeta } from "@/lib/blog";
-import { BlogCard } from "./BlogCard";
-import { ComingSoon } from "./ComingSoon";
+import { RowList } from "./RowList";
 
 export function BlogList({
   posts,
@@ -27,49 +26,45 @@ export function BlogList({
   }, [posts, query, category]);
 
   if (posts.length === 0) {
-    return <ComingSoon message="아직 작성된 글이 없습니다. 곧 찾아오겠습니다." />;
+    return <p className="text-[17px] text-muted">아직 작성된 글이 없습니다. 곧 찾아오겠습니다.</p>;
   }
 
   return (
     <div>
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-16 flex flex-col gap-6 text-[15px]">
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search posts..."
+          placeholder="Search posts"
           aria-label="Search posts"
-          className="w-full max-w-xs rounded-[--radius-base] border border-border px-4 py-2 text-sm outline-none focus:border-accent"
+          className="w-full max-w-xs border-b border-border bg-transparent py-2 outline-none placeholder:text-muted focus:border-foreground"
         />
-      </div>
-
-      <div className="mb-10 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
-        {["ALL", ...categories].map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => setCategory(c)}
-            aria-pressed={category === c}
-            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-colors ${
-              category === c
-                ? "border-accent bg-accent text-white"
-                : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
-            }`}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
-      {filtered.length === 0 ? (
-        <p className="text-sm text-muted">검색 결과가 없습니다.</p>
-      ) : (
-        <div className="flex flex-col">
-          {filtered.map((post) => (
-            <BlogCard key={post.slug} post={post} />
+        <div className="flex flex-wrap gap-x-5 gap-y-2" role="group" aria-label="Filter by category">
+          {["ALL", ...categories].map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setCategory(c)}
+              aria-pressed={category === c}
+              className={category === c ? "underline underline-offset-4" : "text-muted hover:text-foreground"}
+            >
+              {c}
+            </button>
           ))}
         </div>
-      )}
+      </div>
+
+      <RowList
+        empty="검색 결과가 없습니다."
+        rows={filtered.map((post) => ({
+          href: `/blog/${post.slug}`,
+          meta: post.date,
+          title: post.title,
+          label: post.category,
+          body: post.excerpt,
+        }))}
+      />
     </div>
   );
 }

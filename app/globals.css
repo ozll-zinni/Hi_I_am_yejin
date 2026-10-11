@@ -34,16 +34,19 @@ body {
 .prose-blog {
   font-size: 1.0625rem;
   line-height: 1.8;
-  color: color-mix(in srgb, var(--foreground) 90%, transparent);
 }
 
 .prose-blog h2 {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
-  font-size: 1.375rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
   color: var(--foreground);
+}
+
+.prose-blog a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .prose-blog p {
