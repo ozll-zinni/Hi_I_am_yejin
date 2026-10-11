@@ -1,13 +1,21 @@
 import { site } from "@/content/site";
-import { SectionHeading } from "@/components/shared/SectionHeading";
+import { skillGroups } from "@/content/skills";
+import { Section } from "./Section";
 
-export function About() {
+export function About({ index }: { index: number }) {
   return (
-    <section id="about" className="scroll-mt-16 py-20">
-      <SectionHeading eyebrow="ABOUT" title="어떤 개발자인가" />
-      <p className="max-w-2xl whitespace-pre-line text-lg leading-relaxed text-foreground/90">
+    <Section id="about" index={index} title="About">
+      <p className="max-w-3xl whitespace-pre-line text-2xl leading-normal tracking-tight sm:text-[32px]">
         {site.about}
       </p>
-    </section>
+      <dl id="skills" className="mt-20 grid gap-8 text-[15px] sm:grid-cols-3">
+        {skillGroups.map((group) => (
+          <div key={group.title} className="border-t border-border pt-3">
+            <dt className="text-muted">{group.title}</dt>
+            <dd className="mt-2 leading-relaxed">{group.items.join(", ")}</dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
   );
 }

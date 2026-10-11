@@ -1,14 +1,14 @@
 export const skillGroups = [
   {
-    title: "CORE",
+    title: "Core",
     items: ["React", "JavaScript", "TypeScript", "Next.js"],
   },
   {
-    title: "DEVELOPMENT",
+    title: "Development",
     items: ["REST API", "Git", "Jira", "Responsive Web"],
   },
   {
-    title: "INTEREST",
+    title: "Interest",
     items: ["Fintech", "UX", "Web Performance"],
   },
 ] as const;

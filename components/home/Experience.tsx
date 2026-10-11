@@ -1,35 +1,29 @@
 import { experience } from "@/content/experience";
-import { SectionHeading } from "@/components/shared/SectionHeading";
-import { Tag } from "@/components/shared/Tag";
+import { Section } from "./Section";
 
-export function Experience() {
+export function Experience({ index }: { index: number }) {
   return (
-    <section id="experience" className="scroll-mt-16 py-20">
-      <SectionHeading eyebrow="EXPERIENCE" title="어떤 회사에서 어떤 일을 했는가" />
-      <ol className="flex flex-col gap-10 border-l border-border pl-8">
+    <Section id="experience" index={index} title="Experience">
+      <ol>
         {experience.map((item) => (
-          <li key={`${item.company}-${item.period}`} className="relative">
-            <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-accent" />
-            <p className="font-mono text-sm tracking-wider text-accent">{item.period}</p>
-            <h3 className="mt-1 text-xl font-semibold tracking-tight">
-              {item.role} · {item.company}
-            </h3>
-            <ul className="mt-4 flex flex-col gap-1.5 text-sm text-foreground/90">
-              {item.highlights.map((line) => (
-                <li key={line} className="flex gap-2">
-                  <span className="text-muted">·</span>
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {item.stack.map((tech) => (
-                <Tag key={tech}>{tech}</Tag>
-              ))}
+          <li
+            key={`${item.company}-${item.period}`}
+            className="grid gap-4 border-t border-border py-10 first:border-t-0 first:pt-0 sm:grid-cols-[11rem_1fr_auto] sm:gap-8"
+          >
+            <p className="text-[15px] tabular-nums text-muted">{item.period}</p>
+            <div>
+              <h3 className="text-2xl tracking-tight sm:text-3xl">{item.company}</h3>
+              <p className="mt-1 text-[15px] text-muted">{item.role}</p>
+              <ul className="mt-8 flex flex-col gap-2 text-[17px] leading-relaxed">
+                {item.highlights.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
             </div>
+            <p className="text-[15px] text-muted sm:text-right">{item.stack.join(" · ")}</p>
           </li>
         ))}
       </ol>
-    </section>
+    </Section>
   );
 }
