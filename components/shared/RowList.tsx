@@ -10,7 +10,7 @@ export type Row = {
 };
 
 // The numbered row grid shared by the home Experience list and every index page (Work, Blog, Playground).
-export function RowList({ rows, empty }: { rows: Row[]; empty: string }) {
+export function RowList({ rows, empty, arrow = true }: { rows: Row[]; empty: string; arrow?: boolean }) {
   if (rows.length === 0) {
     return <p className="text-[17px] text-muted">{empty}</p>;
   }
@@ -28,9 +28,11 @@ export function RowList({ rows, empty }: { rows: Row[]; empty: string }) {
             <div>
               <h3 className="text-2xl tracking-tight underline-offset-4 group-hover:underline sm:text-3xl">
                 {row.title}
-                <span aria-hidden="true" className="ml-2 inline-block transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                {arrow && (
+                  <span aria-hidden="true" className="ml-2 inline-block transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                )}
               </h3>
               {row.label && <p className="mt-1 text-[15px] text-muted">{row.label}</p>}
               {row.body && <p className="mt-6 text-[17px] leading-relaxed">{row.body}</p>}
