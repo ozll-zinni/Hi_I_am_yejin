@@ -1,15 +1,28 @@
+import Link from "next/link";
 import { experience, otherExperiences, type Experience as Item } from "@/content/experience";
 import { Section } from "./Section";
 
 export function Experience({ index }: { index: number }) {
-  return <ExperienceSection id="experience" title="Work" items={experience} index={index} />;
+  return <ExperienceSection id="experience" title="Work" items={experience} index={index} href="/work" />;
 }
 
 export function OtherExperiences({ index }: { index: number }) {
   return <ExperienceSection id="other-experiences" title="Other Experiences" items={otherExperiences} index={index} />;
 }
 
-function ExperienceSection({ id, title, items, index }: { id: string; title: string; items: Item[]; index: number }) {
+function ExperienceSection({
+  id,
+  title,
+  items,
+  index,
+  href,
+}: {
+  id: string;
+  title: string;
+  items: Item[];
+  index: number;
+  href?: string;
+}) {
   return (
     <Section id={id} index={index} title={title}>
       <ol>
@@ -20,7 +33,15 @@ function ExperienceSection({ id, title, items, index }: { id: string; title: str
           >
             <p className="text-[15px] tabular-nums text-muted">{item.period}</p>
             <div>
-              <h3 className="text-2xl tracking-tight sm:text-3xl">{item.company}</h3>
+              <h3 className="text-2xl tracking-tight sm:text-3xl">
+                {href ? (
+                  <Link href={href} className="underline-offset-4 hover:underline">
+                    {item.company}
+                  </Link>
+                ) : (
+                  item.company
+                )}
+              </h3>
               <p className="mt-1 text-[15px] text-muted">{item.role}</p>
               {item.description && <p className="mt-6 break-keep text-[17px] leading-relaxed">{item.description}</p>}
               <ul className="mt-6 flex list-disc flex-col gap-2 break-keep pl-5 text-[17px] leading-relaxed text-muted">
