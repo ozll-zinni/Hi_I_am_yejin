@@ -33,13 +33,19 @@ export const projects: Project[] = [
   {
     slug: "golf-homepage",
     order: 1,
-    category: ["WORK", "WEB"],
-    name: "통합홈페이지",
-    summary: "하나의 코드에 디자인 테마 3종을 두고, 골프장이 원하는 테마를 골라 홈페이지를 만드는 통합 홈페이지 서비스입니다.",
-    stack: ["React", "Next.js", "TypeScript", "Jotai"],
+    category: ["WEB"],
+    name: "통합 홈페이지",
+    summary: "하나의 코드에 디자인 테마 3종을 두고, 골프장이 원하는 템플릿을 골라 홈페이지를 만드는 통합 홈페이지 서비스입니다.",
+    stack: ["React", "Next.js", "Jotai"],
     period: "2025.12 — Present",
     // TODO(sites): 작업한 골프장을 { name, url, theme } 형식으로 추가하세요. 테마별로 묶여서 보입니다.
-    sites: [],
+    sites: [{ name: "킹스데일골프클럽", url: "https://www.kingsdale.co.kr/", theme: "콘텐츠형" },
+      { name: "수원컨트리클럽", url: "https://www.suwoncc.co.kr/", theme: "스크롤형" },
+      { name: "수서골프앤리조트", url: "https://suseogolfresort.co.kr/", theme: "스크롤형" },
+      { name: "중원골프클럽", url: "https://www.joongwongolf.co.kr/", theme: "슬라이드형" },
+      { name: "스톤비치 골프&리조트", url: "https://stonebeachcc.com/", theme: "슬라이드형" },
+      { name: "포라이즌CC", url: "https://www.fourizon.co.kr/", theme: "슬라이드형" },
+    ],
     caseStudy: [
       {
         heading: "SNS 간편로그인·SSO 인증 흐름 통합 설계",
